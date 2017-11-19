@@ -16,10 +16,16 @@ import java.io.*;
 public class MyClient {
 
     public static void main(String[] args) throws Exception {
-
-        Registry reg = LocateRegistry.getRegistry("192.168.1.95", 4679);
+        
+        //My Server
+        MyServer server = new MyServer();
+        Registry reg1 = LocateRegistry.createRegistry(4679);
+        reg1.bind("rmiserver1", server);
+        
+        //Client Connecting to Server
+        Registry reg2 = LocateRegistry.getRegistry("192.168.1.95", 4679);
         MyRemoteInterface handle
-                = (MyRemoteInterface) reg.lookup("myrmiserver");
+                = (MyRemoteInterface) reg2.lookup("rmiserver2");
 
         while (true) {
             BufferedReader in
