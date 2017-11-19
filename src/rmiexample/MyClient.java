@@ -7,6 +7,7 @@ package rmiexample;
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.io.*;
 
 /**
  *
@@ -16,10 +17,18 @@ public class MyClient {
 
     public static void main(String[] args) throws Exception {
 
-        Registry reg = LocateRegistry.getRegistry("192.168.1.95", 1234);
+        Registry reg = LocateRegistry.getRegistry("192.168.1.95", 4679);
         MyRemoteInterface handle
                 = (MyRemoteInterface) reg.lookup("myrmiserver");
 
-        handle.printMessage("Wassup!");
+        while (true) {
+            BufferedReader in
+                    = new BufferedReader(new InputStreamReader(System.in));
+
+            String message = in.readLine();
+
+            handle.printMessage(message);
+        }
+
     }
 }
