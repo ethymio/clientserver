@@ -17,7 +17,7 @@ import rmiexample.MyRemoteInterface;
 public class MyServer extends UnicastRemoteObject implements MyRemoteInterface {
 
     public void printMessage(String message) throws RemoteException {
-        System.out.println(message);
+        System.out.println("Other Machine: " + message);
     }
 
     public static void main(String args[]) throws Exception {
